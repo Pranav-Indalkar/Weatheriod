@@ -2,7 +2,7 @@
 
 An App that displays accurate weather information of more than 20000 cities across the globe using openweather API to fetch realtime weather updates as well as next 5 days forecast.
 
-<img src="./screenshots/preview1.png?raw=true" height="500">
+<img src="./screenshots/preview1.png?raw=true" height="600">
 <img src="./screenshots/preview2.png?raw=true">
 
 ## Features
