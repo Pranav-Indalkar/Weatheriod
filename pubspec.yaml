@@ -27,7 +27,10 @@ dependencies:
   shared_preferences: ^2.0.5
   geolocator: ^7.0.3
   permission_handler: ^7.1.0
-  charts_flutter: ^0.10.0
+  charts_flutter:
+    git:
+      url: git://github.com/google/charts.git
+      path: charts_flutter
   flutter_swiper: ^1.1.6
 
   # The following adds the Cupertino Icons font to your application.

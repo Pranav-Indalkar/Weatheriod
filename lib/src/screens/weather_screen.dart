@@ -1,15 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_weather/main.dart';
 import 'package:flutter_weather/src/bloc/weather_event.dart';
 import 'package:flutter_weather/src/bloc/weather_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_weather/src/model/weather.dart';
 import 'package:flutter_weather/src/widgets/weather_widget.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../bloc/weather_bloc.dart';
