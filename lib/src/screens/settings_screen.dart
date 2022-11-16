@@ -5,7 +5,9 @@ import 'package:flutter_weather/src/bloc/weather_bloc.dart';
 import 'package:flutter_weather/src/bloc/weather_state.dart';
 import 'package:flutter_weather/src/bloc/weather_event.dart';
 import 'package:flutter_weather/src/themes.dart';
+import 'package:flutter_weather/src/utils/constants.dart';
 import 'package:flutter_weather/src/utils/converters.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_weather/src/widgets/empty_widget.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -17,16 +19,11 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   String _cityName = "Pune";
-  bool useCurrentLocation = false;
-
   _SettingsScreenState();
-
-  
 
   @override
   Widget build(BuildContext context) {
     ThemeData appTheme = AppStateContainer.of(context).theme;
-
     Map map = ModalRoute.of(context).settings.arguments;
     WeatherBloc _weatherBloc  = map['weatherBloc'];
     _cityName = map['cityName'];
@@ -75,10 +72,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     style: TextStyle(color: AppStateContainer.of(context).theme.accentColor),
                   ),
                   Switch(
-                    value: useCurrentLocation,
+                    value: AppStateContainer.of(context).useCurrentLocation,
                     onChanged: (bool _val){
                       setState(() {
-                        useCurrentLocation = !useCurrentLocation;
+                        AppStateContainer.of(context).updateUseLocation(_val);
                         _fetchWeatherWithLocation(_weatherBloc).catchError((error) {
                         _fetchWeatherWithCity(_weatherBloc);
                       });
@@ -288,7 +285,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
   Widget cityChooser(_weatherBloc){
-    if(useCurrentLocation){
+    if(AppStateContainer.of(context).useCurrentLocation){
       return EmptyWidget();
     }else{
       return Container(

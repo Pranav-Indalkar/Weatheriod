@@ -72,6 +72,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
   ThemeData _theme = Themes.getTheme(Themes.DARK_THEME_CODE);
   int themeCode = Themes.DARK_THEME_CODE;
   TemperatureUnit temperatureUnit = TemperatureUnit.celsius;
+  bool useCurrentLocation = true;
 
   @override
   initState() {
@@ -87,6 +88,7 @@ class _AppStateContainerState extends State<AppStateContainer> {
         temperatureUnit = TemperatureUnit.values[
             sharedPref.getInt(CONSTANTS.SHARED_PREF_KEY_TEMPERATURE_UNIT) ??
                 TemperatureUnit.celsius.index];
+        useCurrentLocation = sharedPref.getBool(CONSTANTS.SHARED_PREF_USE_LOCATION) ?? true;
         this._theme = Themes.getTheme(themeCode);
       });
     });
@@ -109,6 +111,14 @@ class _AppStateContainerState extends State<AppStateContainer> {
     SharedPreferences.getInstance().then((sharedPref) {
       sharedPref.setInt(CONSTANTS.SHARED_PREF_KEY_THEME, themeCode);
     });
+  }
+
+  updateUseLocation(bool useLocation){
+    SharedPreferences.getInstance().then((sharedPref) {
+      sharedPref.setBool(CONSTANTS.SHARED_PREF_USE_LOCATION,useLocation);
+      print("Use Location " + sharedPref.getBool(CONSTANTS.SHARED_PREF_USE_LOCATION).toString());
+    });
+    this.useCurrentLocation = useLocation;
   }
 
   updateTemperatureUnit(TemperatureUnit unit) {
